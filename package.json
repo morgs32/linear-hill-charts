@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "version": "0.0.1",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "pnpm --parallel dev",
+    "lint": "eslint .",
+    "build": "pnpm --parallel build",
+    "build:figma": "pnpm --filter 'figma-*' --parallel build",
+    "typecheck": "pnpm --parallel typecheck"
+  },
+  "prisma": {
+    "seed": "pnpm seed"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
+    "@types/jest": "^29.5.3",
+    "@types/mdx": "^2.0.5",
+    "@types/node": "20.4.4",
+    "@types/react": "18.2.16",
+    "@types/react-dom": "18.2.7",
+    "@morgs32/eslint-config": "^1.0.8",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.7"
+  }
+}

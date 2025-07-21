@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  directUrl    = env("DIRECT_URL")
+  relationMode = "prisma"
+}
+
+model Organization {
+  id          String       @id // Linear id
+  linearAuths LinearAuth[]
+  name        String?
+  events      Event[]
+  figmaAuths  FigmaAuth[]
+}
+
+model LinearAuth {
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @default(now())
+  // The following comes from linear
+  linearId       String // User id in linear, not unique because could be authenticated in multiple figma projects
+  email          String
+  name           String
+  avatarUrl      String?
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  accessToken    String
+  // We will only have a user from lhc.com
+  userId         String       @unique
+  user           User         @relation(fields: [userId], references: [id])
+
+  @@index([organizationId])
+  @@index([userId])
+}
+
+model FigmaAuth {
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @default(now())
+  // The following comes from linear
+  linearId       String // User id in linear, not unique because could be authenticated in multiple figma projects
+  email          String
+  name           String
+  avatarUrl      String?
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  accessToken    String
+  // This is figma related
+  workspaceKey   String       @unique
+
+  @@index([organizationId])
+  @@index([workspaceKey])
+}
+
+model User {
+  id          String       @unique // Clerk id
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+  linearAuths LinearAuth[]
+  events      Event[]
+}
+
+model Event {
+  id      String @id
+  payload Json
+
+  user           User?        @relation(fields: [userId], references: [id])
+  userId         String?
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String
+
+  @@index([userId])
+  @@index([organizationId])
+}
+
+enum Action {
+  update
+  create
+}
+
+enum LinearType {
+  Comment
+  Issue
+  Project
+}

@@ -1,0 +1,23 @@
+{
+  "name": "figma-widget-main",
+  "version": "1.0.0",
+  "description": "Your Figma widget",
+  "scripts": {
+    "dev": "vite build --mode development --watch",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit"
+  },
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "marked": "^5.1.2",
+    "okrs": "0.1.27",
+    "zod-sdk": "^0.2.1"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.71.0",
+    "@figma/widget-typings": "^1.5.0",
+    "@types/marked": "^5.0.1",
+    "vitest": "^0.33.0"
+  }
+}

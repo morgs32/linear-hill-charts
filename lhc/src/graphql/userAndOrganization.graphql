@@ -1,0 +1,13 @@
+
+query userAndOrganization {
+  viewer {
+    id
+    email
+    name
+    avatarUrl
+  }
+  organization {
+    id
+    name
+  }
+}

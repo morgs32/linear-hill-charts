@@ -1,0 +1,45 @@
+fragment comment on Comment {
+  id
+  createdAt
+  body
+  parent {
+    id
+  }
+  user {
+    id
+    name
+    avatarUrl
+  }
+}
+
+fragment issue on Issue {
+  id
+  title
+  updatedAt
+  description
+  identifier
+  state {
+    name
+    type
+  }
+  comments(orderBy: createdAt) {
+    nodes {
+      ...comment
+    }
+  }
+}
+
+query hillchartBag($projectId: String!) {
+  organization {
+    name
+  }
+  project(id: $projectId) {
+    name
+    description
+    issues {
+      nodes {
+        ...issue
+      }
+    }
+  }
+}

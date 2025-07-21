@@ -1,0 +1,23 @@
+{
+  "name": "Linear Hill Charts",
+  "id": "1263572513522815442",
+  "api": "1.0.0",
+  "main": "figma-widget-main/lib/figma-widget-main.mjs",
+  "ui": {
+    "js": "figma-widget-ui/lib/figma-widget-ui.mjs",
+    "css": "figma-widget-ui/lib/style.css"
+  },
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": [
+    "figjam"
+  ],
+  "containsWidget": true,
+  "widgetApi": "1.0.0",
+  "networkAccess": {
+    "allowedDomains": [
+      "https://www.linearhillcharts.com",
+      "https://public.linear.app"
+    ]
+  }
+}
